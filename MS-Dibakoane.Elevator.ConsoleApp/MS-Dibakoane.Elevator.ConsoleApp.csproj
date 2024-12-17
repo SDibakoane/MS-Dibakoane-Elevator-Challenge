@@ -17,4 +17,9 @@
       <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MS-Dibakoane.Elevator.Application\MS-Dibakoane.Elevator.Application.csproj" />
+      <ProjectReference Include="..\MS-Dibakoane.Elevator.Infrastructure\MS-Dibakoane.Elevator.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
