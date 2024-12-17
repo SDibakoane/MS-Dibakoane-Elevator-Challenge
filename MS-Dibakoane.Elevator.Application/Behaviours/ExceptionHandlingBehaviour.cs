@@ -5,7 +5,7 @@ namespace MS_Dibakoane.Elevator.Application.Behaviours;
 
 public sealed class ExceptionHandlingBehaviour<TRequest, TResponse>
     (ILogger<ExceptionHandlingBehaviour<TRequest, TResponse>> logger) 
-    : IPipelineBehavior<TRequest, TResponse> where TRequest : class
+    : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {

@@ -10,7 +10,7 @@ public static class ApplicationServiceExtensions
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-            cfg.AddBehavior(typeof(ExceptionHandlingBehaviour<,>));
+            cfg.AddOpenBehavior(typeof(ExceptionHandlingBehaviour<,>));
         });
         return services;
     }
