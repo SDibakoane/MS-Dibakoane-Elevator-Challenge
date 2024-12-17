@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MS_Dibakoane.Elevator.Application;
 using MS_Dibakoane.Elevator.ConsoleApp;
+using MS_Dibakoane.Elevator.ConsoleApp.Middleware;
 using MS_Dibakoane.Elevator.Infrastructure;
 using Serilog;
 
@@ -41,6 +42,7 @@ static IHostBuilder CreateHostBuilder(string[] args)
 {
     return Host.CreateDefaultBuilder(args).ConfigureServices((_, services) =>
     {
+        services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddInfrastructureServices();
         services.AddApplicationService();
         services.AddSingleton<EntryPoint>();
