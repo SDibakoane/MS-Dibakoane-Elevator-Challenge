@@ -15,4 +15,8 @@
       <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MS-Dibakoane.Elevator.Domain\MS-Dibakoane.Elevator.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

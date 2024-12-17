@@ -1,7 +1,10 @@
 using MS_Dibakoane.Elevator.Domain.Common;
 
 namespace MS_Dibakoane.Elevator.Domain.Entities;
-
+/// <summary>
+/// This Dispatcher class handles the assignment of users to an elevator
+/// </summary>
+/// <param name="building"></param>
 public class Dispatcher(Building building)
 {
     public void AssignElevator(int floor)
