@@ -54,20 +54,28 @@ public class Elevator
         }
 
         int nextFloor = Requests.Peek();
-        if (nextFloor > CurrentFloor)
+        while (nextFloor != CurrentFloor)
         {
-            Direction = Direction.Up;
-            CurrentFloor++;
-        }
-        else if (nextFloor < CurrentFloor)
-        {
-            Direction = Direction.Down;
-            CurrentFloor--;
-        }
-
-        if (CurrentFloor == nextFloor)
-        {
-            Requests.Dequeue(); // Reached destination
+            if (nextFloor > CurrentFloor)
+            {
+                Direction = Direction.Up;
+                CurrentFloor++;
+                
+                Thread.Sleep(3000);
+            }
+            else if (nextFloor < CurrentFloor)
+            {
+                Direction = Direction.Down;
+                CurrentFloor--;
+                Thread.Sleep(3000);
+            }
+            
+            Console.Write(string.Join(Environment.NewLine,ToString()));
+            if (CurrentFloor == nextFloor)
+            {
+                Requests.Dequeue(); // Reached destination
+                Console.Write("Elevator has arrived");
+            }
         }
     }
     

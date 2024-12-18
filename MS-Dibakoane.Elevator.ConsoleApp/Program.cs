@@ -1,9 +1,11 @@
-﻿using System.Reflection;
+﻿using System.Collections.Immutable;
+using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MS_Dibakoane.Elevator.Application;
+using MS_Dibakoane.Elevator.Application.Contracts;
 using MS_Dibakoane.Elevator.ConsoleApp;
 using MS_Dibakoane.Elevator.Infrastructure;
 using Serilog;
@@ -20,6 +22,8 @@ using IHost host = CreateHostBuilder(args)
         .WriteTo.Console())
     .Build();
 
+// await host.RunAsync();
+
 var logger = host.Services.GetRequiredService<ILogger<Program>>();
 logger.LogInformation("Elevator application started");
 
@@ -28,8 +32,10 @@ var serviceProvider = scope.ServiceProvider;
 
 try
 {
-    serviceProvider.GetRequiredService<EntryPoint>()
+    await serviceProvider.GetRequiredService<ISimulationManager>()
         .Run(args);
+    // serviceProvider.GetRequiredService<EntryPoint>()
+    //     .Run(args);
 }
 catch (Exception ex)
 {
@@ -43,6 +49,6 @@ static IHostBuilder CreateHostBuilder(string[] args)
     {
         services.AddInfrastructureServices();
         services.AddApplicationService();
-        services.AddSingleton<EntryPoint>();
+        // services.AddSingleton<EntryPoint>();
     });
 }
