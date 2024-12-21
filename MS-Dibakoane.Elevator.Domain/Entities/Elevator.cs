@@ -12,6 +12,7 @@ public class Elevator
     public int MaxCapacity { get; private set; }
     public int PassengerCount { get; private set; }
     private Queue<int> Requests { get; set; }
+    public bool IsAssigned { get; set; }
 
     public Elevator(int id, int maxCapacity)
     {
@@ -27,6 +28,7 @@ public class Elevator
     {
         if (!Requests.Contains(floor))
         {
+            IsAssigned = true;
             Requests.Enqueue(floor);
         }
     }
@@ -60,7 +62,7 @@ public class Elevator
             {
                 Direction = Direction.Up;
                 CurrentFloor++;
-                
+
                 Thread.Sleep(3000);
             }
             else if (nextFloor < CurrentFloor)
@@ -69,15 +71,20 @@ public class Elevator
                 CurrentFloor--;
                 Thread.Sleep(3000);
             }
-            
-            Console.Write(string.Join(Environment.NewLine,ToString()));
-            if (CurrentFloor == nextFloor)
-            {
-                Requests.Dequeue(); // Reached destination
-                Console.Write("Elevator has arrived");
-            }
+
+            Console.Write(string.Join(Environment.NewLine, ToString()));
+            Console.Write(Environment.NewLine);
         }
+
+        if (CurrentFloor == nextFloor)
+        {
+            Requests.Dequeue(); // Reached destination
+            Console.Write("Elevator has arrived on floor: {currentFloor}.", CurrentFloor);
+        }
+        
     }
+
+    public int FloorPassengersCout(int floor) => Requests.Count(c => c.Equals(floor));
     
     public override string ToString()
     {

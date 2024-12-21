@@ -22,8 +22,6 @@ using IHost host = CreateHostBuilder(args)
         .WriteTo.Console())
     .Build();
 
-// await host.RunAsync();
-
 var logger = host.Services.GetRequiredService<ILogger<Program>>();
 logger.LogInformation("Elevator application started");
 
@@ -34,8 +32,6 @@ try
 {
     await serviceProvider.GetRequiredService<ISimulationManager>()
         .Run(args);
-    // serviceProvider.GetRequiredService<EntryPoint>()
-    //     .Run(args);
 }
 catch (Exception ex)
 {
@@ -49,6 +45,5 @@ static IHostBuilder CreateHostBuilder(string[] args)
     {
         services.AddInfrastructureServices();
         services.AddApplicationService();
-        // services.AddSingleton<EntryPoint>();
     });
 }

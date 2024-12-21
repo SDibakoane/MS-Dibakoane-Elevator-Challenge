@@ -22,11 +22,17 @@ public class ElevatorRequestCommandHandler(Dispatcher dispatcher, Building build
             Console.WriteLine(message);
         }
         
-        dispatcher.AssignElevator(request.DestinationFloor);
+        dispatcher.AssignElevator(request.CurrentFloor);
         foreach (var elevator in building.Elevators)
         {
             elevator.Move();
-            //Console.WriteLine(elevator.ToString());
+            if (elevator.IsAssigned)
+            {
+                elevator.LoadPassengers(1);
+                elevator.AddRequest(request.DestinationFloor);
+            }
+            elevator.Move();
+            elevator.UnloadPassengers(elevator.FloorPassengersCout(request.DestinationFloor));
         }
     }
 }
