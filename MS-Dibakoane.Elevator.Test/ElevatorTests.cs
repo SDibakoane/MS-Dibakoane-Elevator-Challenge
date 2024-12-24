@@ -44,4 +44,17 @@ public class ElevatorTests
         //Assert
         Assert.Equal(5, elevator.PassengerCount);
     }
+
+    [Fact]
+    public void LoadPassengers_ShouldThrowExceptionIfCapacityExceeded()
+    {
+        //Arrange
+        var elevator = new Domain.Entities.Elevator(1, 10);
+
+        //Act
+        elevator.LoadPassengers(10);
+
+        //Assert
+        Assert.Throws<InvalidOperationException>(() => elevator.LoadPassengers(1));
+    }
 }
