@@ -31,4 +31,17 @@ public class ElevatorTests
         //Assert
         Assert.Equal(1, elevator.Requests.Count);
     }
+
+    [Fact]
+    public void LoadPassengers_ShouldIncreasePassengerCount()
+    {
+        //Arrange
+        var elevator = new Domain.Entities.Elevator(1, 10);
+
+        //Act
+        elevator.LoadPassengers(5);
+
+        //Assert
+        Assert.Equal(5, elevator.PassengerCount);
+    }
 }
