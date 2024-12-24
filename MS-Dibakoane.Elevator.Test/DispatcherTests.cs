@@ -24,4 +24,15 @@ public class DispatcherTests
         // Assert
         Assert.Contains(4, elevator1.Requests); // Closest elevator is elevator1
     }
+
+    [Fact]
+    public void AssignElevator_ShouldHandleInvalidFloor()
+    {
+        //Arrange
+        var building = new Building(10, 2, 5);
+        var dispatcher = new Dispatcher(building);
+
+        //Act & Assert
+        Assert.Throws<ArgumentOutOfRangeException>(() => dispatcher.AssignElevator(11));
+    }
 }
